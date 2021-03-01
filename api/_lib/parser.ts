@@ -51,9 +51,11 @@ function getArray(stringOrArray: string[] | string | undefined): string[] {
 }
 
 function getDefaultImages(images: string[], theme: Theme): string[] {
-    const defaultImage = theme === 'light'
-        ? 'https://res.cloudinary.com/slow-works/image/upload/static/SW-icon-negative.svg'
-        : 'https://res.cloudinary.com/slow-works/image/upload/static/SW-icon.svg';
+    const defaultImage = theme === 'aqp'
+        ? 'https://res.cloudinary.com/slow-works/image/upload/static/AQP-icon-negative.svg'
+        : theme === 'light'
+            ? 'https://res.cloudinary.com/slow-works/image/upload/static/SW-icon-negative.svg'
+            : 'https://res.cloudinary.com/slow-works/image/upload/static/SW-icon.svg';
 
     if (!images || !images[0]) {
         return [defaultImage];
