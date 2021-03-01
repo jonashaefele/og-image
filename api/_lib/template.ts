@@ -10,44 +10,38 @@ const emojify = (text: string) => twemoji.parse(text, twOptions);
 const font = readFileSync(`${__dirname}/../_fonts/name_sans-variable.woff2`).toString('base64');
 
 function getCss(theme: string, fontSize: string) {
-    let background = 'white';
-    let foreground = 'black';
-    let radial = 'lightgray';
+    let background = '#0d0a54';
+    let foreground = '#faf8ed';
+    let radial = '#1a2cb7';
 
-    if (theme === 'dark') {
-        background = 'black';
-        foreground = 'white';
-        radial = 'dimgray';
+    if (theme === 'aqp') {
+        background = '#055343';
+        foreground = '#faf8ed';
+        radial = '#0e4755';
+    }
+
+    if (theme === 'light') {
+        background = '#faf8ed';
+        foreground = '#1a2cb7';
+        radial = 'transparent';
     }
     return `
     @font-face {
         font-family: 'Name Sans';
-        font-style:  normal;
-        font-weight: normal;
         src: url(data:font/woff2;charset=utf-8;base64,${font}) format('woff2');
     }
 
     body {
         background: ${background};
-        background-image: radial-gradient(circle at 25px 25px, ${radial} 2%, transparent 0%), radial-gradient(circle at 75px 75px, ${radial} 2%, transparent 0%);
-        background-size: 100px 100px;
+        background-image: radial-gradient(circle at left bottom, ${radial} 2%, transparent 80%);
+        background-repeat: no-repeat;
         height: 100vh;
         display: flex;
         text-align: center;
         align-items: center;
         justify-content: center;
-    }
-
-    code {
-        color: #D400FF;
         font-family: 'Name Sans';
-        font-optical-sizing: 12;
-        font-weigth: 300;
-        white-space: pre-wrap;
-    }
-
-    code:before, code:after {
-        content: '\`';
+        font-weight: 400;
     }
 
     .logo-wrapper {
@@ -64,8 +58,9 @@ function getCss(theme: string, fontSize: string) {
 
     .plus {
         color: #BBB;
-        font-family: Times New Roman, Verdana;
-        font-size: 100px;
+        font-family: 'Name Sans', Times New Roman, Verdana;
+        font-weight: 200;
+        font-size: 150px;
     }
 
     .spacer {
@@ -85,12 +80,29 @@ function getCss(theme: string, fontSize: string) {
         font-style: normal;
         color: ${foreground};
         line-height: 1.8;
-    }`;
+    }
+    
+    code {
+        color: #4294ed;
+        font-family: 'Name Sans';
+        font-optical-sizing: 12;
+        font-weight: 300;
+        white-space: pre-wrap;
+    }
+
+    code:before, code:after {
+        content: '\`';
+    }
+
+    strong {
+        font-weight: 700;
+    }
+    `;
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
     const { text, theme, md, fontSize, images, widths, heights } = parsedReq;
-    return `<!DOCTYPE html>
+    const markup = `<!DOCTYPE html>
 <html>
     <meta charset="utf-8">
     <title>Generated Image</title>
@@ -114,6 +126,9 @@ export function getHtml(parsedReq: ParsedRequest) {
         </div>
     </body>
 </html>`;
+
+ console.log(markup);
+ return markup;
 }
 
 function getImage(src: string, width ='auto', height = '225') {

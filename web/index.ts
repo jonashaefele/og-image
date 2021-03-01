@@ -121,8 +121,9 @@ const Toast = ({ show, message }: ToastProps) => {
 }
 
 const themeOptions: DropdownOption[] = [
+    { text: 'Slow Works', value: 'sw' },
+    { text: 'A Quick Pause', value: 'aqp' },
     { text: 'Light', value: 'light' },
-    { text: 'Dark', value: 'dark' },
 ];
 
 const fileTypeOptions: DropdownOption[] = [
@@ -141,17 +142,21 @@ const markdownOptions: DropdownOption[] = [
     { text: 'Markdown', value: '1' },
 ];
 
-const imageLightOptions: DropdownOption[] = [
-    { text: 'Vercel', value: 'https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-black.svg' },
-    { text: 'Next.js', value: 'https://assets.vercel.com/image/upload/front/assets/design/nextjs-black-logo.svg' },
-    { text: 'Hyper', value: 'https://assets.vercel.com/image/upload/front/assets/design/hyper-color-logo.svg' },
+const imageSWOptions:  DropdownOption[] = [
+    { text: 'Slow Works', value: 'https://res.cloudinary.com/slow-works/image/upload/static/SW-icon-negative.svg' },
+    { text: 'A Quick Pause', value: 'https://res.cloudinary.com/slow-works/image/upload/static/AQP-icon-negative.svg' },
 ];
 
-const imageDarkOptions: DropdownOption[] = [
+const imageSWLightOptions: DropdownOption[] = [
+    { text: 'Slow Works - dark', value: 'https://res.cloudinary.com/slow-works/image/upload/static/SW-icon.svg' },
+    { text: 'A Quick Pause - dark', value: 'https://res.cloudinary.com/slow-works/image/upload/static/AQP-icon.svg' },
+];
 
-    { text: 'Vercel', value: 'https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-white.svg' },
-    { text: 'Next.js', value: 'https://assets.vercel.com/image/upload/front/assets/design/nextjs-white-logo.svg' },
-    { text: 'Hyper', value: 'https://assets.vercel.com/image/upload/front/assets/design/hyper-bw-logo.svg' },
+const imageAQPOptions: DropdownOption[] = [
+    { text: 'A Quick Pause', value: 'https://res.cloudinary.com/slow-works/image/upload/static/AQP-icon-negative.svg' },
+    { text: 'Slow Works', value: 'https://res.cloudinary.com/slow-works/image/upload/static/SW-icon-negative.svg' },
+    { text: 'A Quick Pause - dark', value: 'https://res.cloudinary.com/slow-works/image/upload/static/AQP-icon.svg' },
+    { text: 'Slow Works - dark', value: 'https://res.cloudinary.com/slow-works/image/upload/static/SW-icon.svg' },
 ];
 
 const widthOptions = [
@@ -203,10 +208,10 @@ const App = (_: any, state: AppState, setState: SetState) => {
     const {
         fileType = 'png',
         fontSize = '100px',
-        theme = 'light',
+        theme = 'sw',
         md = true,
         text = '**Hello** World',
-        images=[imageLightOptions[0].value],
+        images=[imageSWOptions[0 ].value],
         widths=[],
         heights=[],
         showToast = false,
@@ -216,7 +221,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
         overrideUrl = null,
     } = state;
     const mdValue = md ? '1' : '0';
-    const imageOptions = theme === 'light' ? imageLightOptions : imageDarkOptions;
+    const imageOptions = theme === 'sw' ? imageSWOptions : theme === 'light' ? imageSWLightOptions :  imageAQPOptions;
     const url = new URL(window.location.origin);
     url.pathname = `${encodeURIComponent(text)}.${fileType}`;
     url.searchParams.append('theme', theme);
@@ -243,7 +248,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
                         options: themeOptions,
                         value: theme,
                         onchange: (val: Theme) => {
-                            const options = val === 'light' ? imageLightOptions : imageDarkOptions
+                            const options = val === 'sw' ? imageSWOptions : val === 'light' ? imageSWLightOptions : imageAQPOptions
                             let clone = [...images];
                             clone[0] = options[selectedImageIndex].value;
                             setLoadingState({ theme: val, images: clone });
