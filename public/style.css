@@ -1,5 +1,10 @@
+@font-face {
+    font-family: 'Name Sans';
+    src: url('/fonts/name_sans-variable.woff2') format('woff2');
+  }
+
 body {
-    font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-family: "Name Sans", "Helvetica", "Arial", sans-serif;
     margin: 20px;
 }
 
