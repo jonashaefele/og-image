@@ -102,7 +102,7 @@ function getCss(theme: string, fontSize: string) {
 
 export function getHtml(parsedReq: ParsedRequest) {
     const { text, theme, md, fontSize, images, widths, heights } = parsedReq;
-    const markup = `<!DOCTYPE html>
+    return `<!DOCTYPE html>
 <html>
     <meta charset="utf-8">
     <title>Generated Image</title>
@@ -126,9 +126,6 @@ export function getHtml(parsedReq: ParsedRequest) {
         </div>
     </body>
 </html>`;
-
- console.log(markup);
- return markup;
 }
 
 function getImage(src: string, width ='auto', height = '225') {
