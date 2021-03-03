@@ -207,11 +207,11 @@ const App = (_: any, state: AppState, setState: SetState) => {
     };
     const {
         fileType = 'png',
-        fontSize = '100px',
+        fontSize = '96px',
         theme = 'sw',
         md = true,
         text = '**Hello** World',
-        images=[imageSWOptions[0 ].value],
+        images=[imageSWOptions[0].value],
         widths=[],
         heights=[],
         showToast = false,

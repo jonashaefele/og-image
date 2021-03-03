@@ -30,7 +30,7 @@ export function parseRequest(req: IncomingMessage) {
         fileType: extension === 'jpeg' ? extension : 'png',
         text: decodeURIComponent(text),
         theme: theme === 'light' ? 'light' : theme === 'aqp' ? 'aqp' : 'sw',
-        md: md === '1' || md === 'true',
+        md: md !== '0' && md !== 'false',
         fontSize: fontSize || '96px',
         images: getArray(images),
         widths: getArray(widths),
@@ -54,8 +54,8 @@ function getDefaultImages(images: string[], theme: Theme): string[] {
     const defaultImage = theme === 'aqp'
         ? 'https://res.cloudinary.com/slow-works/image/upload/static/AQP-icon-negative.svg'
         : theme === 'light'
-            ? 'https://res.cloudinary.com/slow-works/image/upload/static/SW-icon-negative.svg'
-            : 'https://res.cloudinary.com/slow-works/image/upload/static/SW-icon.svg';
+            ? 'https://res.cloudinary.com/slow-works/image/upload/static/SW-icon.svg'
+            : 'https://res.cloudinary.com/slow-works/image/upload/static/SW-icon-negative.svg';
 
     if (!images || !images[0]) {
         return [defaultImage];

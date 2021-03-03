@@ -53,7 +53,7 @@ function getCss(theme: string, fontSize: string) {
     }
 
     .logo {
-        margin: 0 75px;
+        margin: 0 35px;
     }
 
     .plus {
@@ -64,7 +64,7 @@ function getCss(theme: string, fontSize: string) {
     }
 
     .spacer {
-        margin: 150px;
+        margin: 75px;
     }
 
     .emoji {
@@ -75,11 +75,12 @@ function getCss(theme: string, fontSize: string) {
     }
     
     .heading {
+        width: 100%;
         font-family: 'Name Sans', sans-serif;
         font-size: ${sanitizeHtml(fontSize)};
-        font-style: normal;
+        font-weight: 400;
         color: ${foreground};
-        line-height: 1.8;
+        line-height: 1.3;
     }
     
     code {
@@ -94,7 +95,7 @@ function getCss(theme: string, fontSize: string) {
         content: '\`';
     }
 
-    strong {
+    .heading strong {
         font-weight: 700;
     }
     `;
